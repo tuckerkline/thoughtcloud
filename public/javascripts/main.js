@@ -18,12 +18,9 @@ angular.module('thoughtApp')
 		var locURL = {url : ''}
 
     $scope.showPosition= function(loc){
-    	console.log("Lat: ", loc.coords.latitude)
     	lat = loc.coords.latitude.toString()
-    	// console.log("Long: ", loc.coords.longitude)
     	lng = loc.coords.longitude.toString()
     	locURL.url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=AIzaSyCUwxKvlHSXxTblHybE0O0KtodRFFm6UGg"
-    	console.log(locURL)
     	$http.post('/getCity', locURL)
     		.then(function(returnData){
     			console.log(returnData)
@@ -31,10 +28,14 @@ angular.module('thoughtApp')
     }
 
 		$scope.getLocation = function() {
+			console.log("page loaded")
 	    if (navigator.geolocation) {
 	        navigator.geolocation.getCurrentPosition($scope.showPosition)
 	    } else { 
-	        x.innerHTML = "Geolocation is not supported by this browser.";
+	        console.log("location services not enabled")
 	    }
 	  }
+
+	  window.onLoad = $scope.getLocation()
+		
 }])
