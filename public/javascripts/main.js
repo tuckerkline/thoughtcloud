@@ -14,6 +14,8 @@ angular.module('thoughtApp')
 angular.module('thoughtApp')
 	.controller('mainController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
 
+		var TESTING = "GIT TEST"
+
 		var lat, lng
 		var locURL = {url : ''}
 
