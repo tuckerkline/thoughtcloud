@@ -30,7 +30,7 @@ app.use('/', routes);
 app.post('/getCity', function(req, res){
 	console.log(req.body.url)
 
-	var city = ''
+	var loc = {city: '', state: ''}
 
   request({
     url: req.body.url,
@@ -39,9 +39,9 @@ app.post('/getCity', function(req, res){
 		if(error){
 			console.log(error)
 		} else {
-			console.log(body.results[3].address_components[0].long_name)
-			city = body.results[3].address_components[0].long_name
-			res.send(city)
+			loc.city = body.results[3].address_components[0].long_name
+			loc.state = body.results[3].address_components[2].short_name
+			res.send(loc)
 		}
 	})
 
